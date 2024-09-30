@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Universities in <%= params[:country] || 'All Countries' %></h1>
+
+    <% if @message.present? %>
+      <div class="alert alert-warning" role="alert">
+        <%= @message %>
+      </div>
+    <% end %>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @universities.each do |university| %>
+          <tr>
+            <td><%= university.name %></td>
+            <td><%= university.country %></td>
+            <td><%= link_to university.web_page, university.web_page, target: "_blank" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to 'Search Again', search_universities_path, class: "btn btn-secondary mt-3" %>
+  </div>
+</div>
