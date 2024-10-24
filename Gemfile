@@ -55,3 +55,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "google-serverless-exec", github: "masuidrive/serverless-exec-ruby", branch: "update-to-latest-gcloud"
+gem "appengine", "~> 0.7.0"

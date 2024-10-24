@@ -13,7 +13,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips bash bash-competion libffi-dev tzdata postgresql nodejs npm yarn libpq-dev && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips bash libffi-dev tzdata postgresql nodejs npm yarn libpq-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
@@ -21,7 +21,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
-
+ENV SECRET_KEY_BASE=ae4d2ce8e9b9b4ae2f784eef693867a6
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
@@ -66,4 +66,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]

@@ -1,0 +1,12 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+runtime_config:
+  ruby_version: 3.3.5
+  operating_system: "ubuntu22"
+
+env_variables:
+  SECRET_KEY_BASE: 9234beb9f692ef5b970eff843983a887501544fa05b3f4313f2319463e956fdaf1b2d78ffeac9c8a48338ab9143147e53fe9cfc2a6d2d011d734f5e788771465
+
+  beta_settings:
+  cloud_sql_instances: /cloudsql/dockeruniversitytf:us-central1:uni-app

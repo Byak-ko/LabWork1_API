@@ -94,3 +94,5 @@ build-iPhoneSimulator/
 >>>>>>> 0856a800a8f917ca3aaeda0539731381afb2b187
 
 /config/credentials/production.key
+
+.env

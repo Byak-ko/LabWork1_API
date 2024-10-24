@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  postgres:
+  db:
     image: postgres:16.4-alpine
     container_name: uni-app-postgres
     ports:
@@ -11,8 +11,28 @@ services:
     command:
       "postgres -c 'max_connections=500'"
     environment:
-      - POSTGRES_PASSWORD=111111
+      - POSTGRES_PASSWORD=11111111
       - POSTGRES_USER=postgres
       - POSTGRES_DB=univapp_db
 
-    
+  uni-web:
+    build: .
+    command: "./bin/rails server"
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - RAILS_MASTER_KEY=ae4d2ce8e9b9b4ae2f784eef693867a6
+      - SECRET_KEY_BASE=ae4d2ce8e9b9b4ae2f784eef693867a6
+    volumes:
+      - app-storage:/rails/storage
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data: {}
+  app-storage: {}

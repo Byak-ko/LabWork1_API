@@ -3,18 +3,28 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres  
-  password: 111111
-  host: localhost
+  password: 11111111
+  host: /cloudsql/dockeruniversitytf:us-central1:uni-app
   port: 5432
 
 development:
   <<: *default
+  username: postgres  
+  password: 11111111
   database: univapp_db
 
 test:
   <<: *default
+  username: postgres  
+  password: 11111111
   database: univapp_test
 
 production:
   <<: *default
-  database: univapp_production
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  database: uni_app
+  username: postgres
+  password: 11111111
+  host: /cloudsql/dockeruniversitytf:us-central1:uni-app
